@@ -1,0 +1,367 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, 'Segoe UI', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background: #f5f7f0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 头部 */
+header {
+    background: #2c5e2e;
+    color: white;
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 24px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 30px;
+    transition: background 0.2s;
+}
+
+nav a.active {
+    background: #ffb347;
+    color: #2c5e2e;
+}
+
+nav a:hover {
+    background: #ffb347;
+    color: #2c5e2e;
+}
+
+.badge {
+    background-color: #e67e22;
+    border-radius: 50px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    margin-left: 6px;
+}
+
+/* 主内容 */
+main {
+    max-width: 1200px;
+    margin: 32px auto;
+    padding: 0 20px;
+    flex: 1;
+}
+
+h2 {
+    color: #2c5e2e;
+    margin-bottom: 24px;
+    border-left: 5px solid #ffb347;
+    padding-left: 16px;
+}
+
+/* 商品网格 */
+/* .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #e0e8d5;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+} */
+/* 商品网格 - 横向滚动，永不串行 */
+/* 商品网格 - 横向滚动 + 鼠标拖拽（隐藏滚动条） */
+.product-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 24px;
+    padding-bottom: 12px;
+    cursor: grab;               /* 手型提示可拖拽 */
+    scrollbar-width: none;      /* Firefox 隐藏滚动条 */
+}
+
+.product-grid:active {
+    cursor: grabbing;           /* 拖拽中手型 */
+}
+
+/* Chrome/Safari/Edge 隐藏滚动条 */
+.product-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.product-card {
+    flex: 0 0 280px;   /* 固定宽度，不伸缩，不换行 */
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #e0e8d5;
+}
+
+/* 其余样式保持不变 */
+.product-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: #e9f0e3;
+}
+
+.product-info {
+    padding: 16px;
+}
+
+.product-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2c5e2e;
+    margin-bottom: 6px;
+}
+
+.product-origin {
+    font-size: 0.85rem;
+    color: #7f8c6d;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #d35400;
+    margin: 12px 0;
+}
+
+.product-price small {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: #5a6e47;
+}
+
+.add-btn {
+    background: #2c5e2e;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.add-btn:hover {
+    background: #1e451f;
+}
+
+/* 购物车表格 */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.cart-table th, .cart-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e2e8ce;
+    text-align: left;
+}
+
+.cart-table th {
+    background: #f0f5ea;
+    color: #2c5e2e;
+}
+
+.qty-input {
+    width: 70px;
+    padding: 6px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.remove-link {
+    color: #e67e22;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.cart-summary {
+    margin-top: 24px;
+    text-align: right;
+    font-size: 1.3rem;
+    border-top: 2px solid #dee6d3;
+    padding-top: 20px;
+}
+
+.checkout-btn {
+    background: #ffb347;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 40px;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.checkout-btn:hover {
+    background: #ff9f1a;
+}
+
+.empty-cart {
+    text-align: center;
+    color: #8aa07c;
+    padding: 60px;
+    background: white;
+    border-radius: 24px;
+    font-size: 1.2rem;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #2c5e2e;
+    color: #ddd;
+    margin-top: 40px;
+}
+/* ---------- 联系商家按钮 & 聊天窗口 ---------- */
+.contact-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #2c5e2e;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: transform 0.2s;
+}
+.contact-btn:hover {
+    transform: scale(1.05);
+    background: #1e451f;
+}
+.chat-window {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 320px;
+    height: 450px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    z-index: 1001;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+.chat-window.hidden {
+    display: none;
+}
+.chat-header {
+    background: #2c5e2e;
+    color: white;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+.chat-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+.chat-messages {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.message {
+    max-width: 80%;
+    padding: 8px 12px;
+    border-radius: 18px;
+    word-wrap: break-word;
+}
+.message.user {
+    background: #2c5e2e;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+.message.merchant {
+    background: #e9e9e9;
+    color: #333;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+.chat-input-area {
+    display: flex;
+    border-top: 1px solid #ddd;
+    padding: 8px;
+    background: white;
+}
+.chat-input-area input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+}
+.chat-input-area button {
+    margin-left: 8px;
+    background: #ffb347;
+    border: none;
+    padding: 0 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.chat-input-area button:hover {
+    background: #ff9f1a;
+}
