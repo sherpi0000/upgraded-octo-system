@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车 - 助农农产品交易平台</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">🌾 乡野直达 · 助农交易</div>
+            <nav>
+                <a href="index.html">首页</a>
+                <a href="cart.html" class="active">购物车 <span id="cartCount" class="badge">0</span></a>
+                <a href="merchant.html" target="_blank">📦 商家中心</a>
+                <a href="admin.html" target="_blank">📊 管理后台</a>
+            </nav>
+    </header>
+
+    <main>
+        <h2>🛒 我的购物车</h2>
+        <div id="cartContainer">
+            <!-- 动态渲染购物车列表 -->
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 助农农产品交易平台 | 助农公益项目</p >
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCart();
+            updateCartBadge();
+        });
+    </script>
+</body>
+</html>
